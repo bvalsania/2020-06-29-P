@@ -8,6 +8,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.PremierLeague.model.Coppia;
+import it.polito.tdp.PremierLeague.model.Match;
 import it.polito.tdp.PremierLeague.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,13 +42,13 @@ public class FXMLController {
     private TextField txtMinuti; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbMese"
-    private ComboBox<?> cmbMese; // Value injected by FXMLLoader
+    private ComboBox<Integer> cmbMese; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbM1"
-    private ComboBox<?> cmbM1; // Value injected by FXMLLoader
+    private ComboBox<Match> cmbM1; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbM2"
-    private ComboBox<?> cmbM2; // Value injected by FXMLLoader
+    private ComboBox<Match> cmbM2; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
@@ -53,16 +56,177 @@ public class FXMLController {
     @FXML
     void doConnessioneMassima(ActionEvent event) {
     	
+  
+txtResult.clear();
+    	
+    	try {
+    		
+    		int min = Integer.parseInt(this.txtMinuti.getText());
+    		int mese = this.cmbMese.getValue();
+    		if(min>90 ||min<1) {
+    			txtResult.appendText("inserire un valore tra 1 e 90");
+    		}
+    		
+    		if(mese == 0) {
+    			txtResult.appendText("Selezionare un mese!!");
+    		}
+    		
+    		List<Coppia> r =this.model.getConnessioneMax(mese, min);
+    		txtResult.appendText("Coppi con conn max :\n"+r);
+    		
+    	}catch(NumberFormatException e) {
+    		txtResult.appendText("errore, inserire un valore");
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	/*	txtResult.clear();
+    	
+    	int m = this.cmbMese.getValue();
+    	
+		txtResult.appendText("Connessione massima trovata: \n"+this.model.getMaxConnessione(m, Integer.parseInt(txtMinuti.getText())));
+		
+    	
+    	
+    */
     }
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
     	
+    	txtResult.clear();
+    	
+    	try {
+    		
+    		int min = Integer.parseInt(this.txtMinuti.getText());
+    		int mese = this.cmbMese.getValue();
+    		if(min>90 ||min<1) {
+    			txtResult.appendText("inserire un valore tra 1 e 90");
+    		}
+    		
+    		if(mese == 0) {
+    			txtResult.appendText("Selezionare un mese!!");
+    		}
+    		
+    		String msg = this.model.creg(mese, min);
+    		txtResult.appendText(msg);
+    		
+    	}catch(NumberFormatException e) {
+    		txtResult.appendText("errore, inserire un valore");
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	/*	txtResult.clear();
+    	int m = this.cmbMese.getValue();
+    	
+    	
+    	try {
+    		
+    		int minuti = Integer.parseInt(txtMinuti.getText()) ;
+    		this.model.creaGrafo(m,minuti);
+    		
+    	}catch(NumberFormatException e) {
+    		txtResult.appendText("Inserisci un numero di minuti valido");
+    	}
+    	
+    	
+    
+    	txtResult.appendText("Grafo creato!! \n");
+    	txtResult.appendText("#vertici: "+ this.model.nVertici()+"\n");
+    	txtResult.appendText("# archi: " +this.model.nArchi());
+    	
+    	this.cmbM1.getItems().addAll(this.model.getVertici());
+    	this.cmbM2.getItems().addAll(this.model.getVertici());
+    	
+    	*/
     }
 
     @FXML
     void doCollegamento(ActionEvent event) {
+  
     	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	/* 	
+    	Match m1 = this.cmbM1.getValue();
+    	Match m2 = this.cmbM2.getValue();
+    	
+    	if(m1== null || m2 == null) {
+    		txtResult.appendText("Seleziona i matchi");
+    		return;
+    	}
+    	txtResult.clear();
+    	List<Match > lista = this.model.cercaMax(m1, m2);
+    	
+    	for(Match m: lista) {
+    		txtResult.appendText(this.model.geLivOttimo()+"Cammino trovato : "+ m.toString()+"\n ");
+    	}
+    	*/
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -79,7 +243,10 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
-  
+    	
+    	for(int i =1;i<=12;i++) {
+    		this.cmbMese.getItems().addAll(i);
+    	}
     }
     
     
